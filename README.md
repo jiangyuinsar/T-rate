@@ -87,17 +87,14 @@ The physical meaning of the key parameters is summarized below. The table uses m
 ```text
 T-rate/
 ├── Trate.py
-├── run_T_rate_inversion_control.py
-├── run_T_rate_inversion_sampler.py
-├── run_T_rate_inversion_prior.py
-├── run_T_rate_inversion_impulse.py
-├── example_data/
-├── example_outputs/
+├── run_T_rate_inversion_example.py
+├── example_input/
+│   └── example_input.txt
+├── example_output/
 ├── figures/
 │   ├── T_rate_logo.png
 │   ├── Figure_parameter_schematic.png
 │   └── Figure_control_experiment_results.png
-├── results/
 ├── README.md
 ├── requirements.txt
 └── LICENSE
@@ -105,7 +102,7 @@ T-rate/
 
 `Trate.py` contains the reusable T-rate core functions, including the forward model, likelihood functions, posterior extraction, and plotting utilities. For most users, `Trate.py` should be treated as a library file.
 
-The `run_T_rate_inversion_*.py` files are user-facing driver scripts. New experiments should be created by copying and editing one of these driver scripts.
+The `run_T_rate_inversion_example.py` file is the user-facing driver script. New experiments can be created by copying and editing this script.
 
 ---
 
@@ -135,18 +132,18 @@ scipy
 Run the control example:
 
 ```bash
-python run_T_rate_inversion_control.py
+python run_T_rate_inversion_example.py
 ```
 
-The control example uses a synthetic dataset included in `example_data/`:
+The example inversion uses a synthetic input file included in `example_input/`:
 
 ```text
-example_data/example_input_control.txt
+example_input/example_input.txt
 ```
 
-New users do not need to prepare their own catalog before running this example. The control example should run without modification if the repository is downloaded completely.
+New users do not need to prepare their own catalog before running this example. The example inversion should run without modification if the repository is downloaded completely.
 
-After a successful run, a new results folder should be created. It should contain output files such as:
+After a successful run, output files should be created in `example_output/`. It should contain files such as:
 
 ```text
 parameters.txt
@@ -162,8 +159,8 @@ S_modeled.png
 For a first test, users should:
 
 1. Create and activate the `Trate_env` environment.
-2. Run `python run_T_rate_inversion_control.py` without changing anything.
-3. Confirm that output files are created in the results folder.
+2. Run `python run_T_rate_inversion_example.py` without changing anything.
+3. Confirm that output files are created in `example_output/`.
 4. Open `lambda_modeled.png`, `S_modeled.png`, and `trace_plot.png`.
 
 ---
@@ -175,7 +172,7 @@ For a new application or sensitivity test, users should copy one existing driver
 For example:
 
 ```text
-run_T_rate_inversion_control.py
+run_T_rate_inversion_example.py
 ```
 
 There are two main places to modify.
@@ -219,10 +216,10 @@ This part controls experiment-level settings, including:
 
 ## 6. Input Data Format
 
-The default control driver script reads:
+The example driver script reads:
 
 ```text
-example_data/example_input_control.txt
+example_input/example_input.txt
 ```
 
 This file is a plain text file with **two columns**:
@@ -323,7 +320,7 @@ For crustal applications, users may start with a shear modulus of 30 GPa. The st
 
 ## 9. Output Files
 
-Each run produces output files in a result directory. The exact output folder name is defined in the driver script, usually through the experiment ID or output-directory settings.
+Each run produces output files in `example_output/`. The exact output folder name can be modified in the driver script.
 
 Typical outputs include:
 
@@ -344,7 +341,7 @@ S_modeled.png
 
 ![Figure 2. Example output from the control experiment.](figures/Figure_control_experiment_results.png)
 
-*Figure 2. Input data and inversion results for the synthetic control experiment. (a) Observed event-rate ratio, R/r, and modeled conditional intensity. (b) Inferred stressing-rate history and cumulative stress history. (c) Joint posterior probability distribution of the model parameters.*
+*Figure 2. Input data and inversion results for the synthetic example experiment. (a) Observed event-rate ratio, R/r, and modeled conditional intensity. (b) Inferred stressing-rate history and cumulative stress history. (c) Joint posterior probability distribution of the model parameters.*
 
 The posterior parameter file is organized as:
 
@@ -370,16 +367,13 @@ t1_1  t1_2  t2_1  t2_2  t3_1  t3_2  t4_1  t4_2  L_1  L_2  Asigma_0  tau_rate_bg
 
 ## 10. Sensitivity Tests
 
-The repository includes driver scripts for different synthetic experiments and sensitivity tests.
+The repository includes one example driver script:
 
 ```text
-run_T_rate_inversion_control.py    # default control experiment
-run_T_rate_inversion_sampler.py    # sampler sensitivity test
-run_T_rate_inversion_prior.py      # prior sensitivity test
-run_T_rate_inversion_impulse.py    # source-function sensitivity test
+run_T_rate_inversion_example.py
 ```
 
-Users can copy and modify these scripts for their own experiments.
+Users can copy and modify this script to create their own sensitivity tests. For example, users may create separate driver scripts for prior sensitivity, sampler sensitivity, or source-function sensitivity tests.
 
 ---
 
