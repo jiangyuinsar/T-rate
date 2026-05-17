@@ -89,7 +89,7 @@ T-rate/
 ├── Trate.py
 ├── run_T_rate_inversion_example.py
 ├── example_input/
-│   └── example_input.txt
+│   └── .gitkeep
 ├── example_output/example/
 ├── figures/
 │   ├── T_rate_logo.png
@@ -136,6 +136,8 @@ Run the control example:
 python run_T_rate_inversion_example.py
 ```
 
+The example inversion takes approximately 5–15 minutes on a 4-core machine (10,000 draws + 10,000 tuning steps × 4 chains). The progress bar will appear shortly after the script starts.
+
 The example inversion uses a synthetic input file included in `example_input/`:
 
 ```text
@@ -161,7 +163,7 @@ trace_plot.png
 For a first test, users should:
 
 1. Create and activate the `Trate_env` environment.
-2. Run `python run_T_rate_inversion_example.py` without changing anything.
+2. Run `python run_T_rate_inversion_example.py` without changing anything. The script will take approximately 5–15 minutes to complete. The terminal will show a live progress bar during MCMC sampling — this is normal.
 3. Confirm that output files are created in `example_output/example/`.
 4. Open `R_obs_vs_mod.png`, `S_modeled.png`, `joint_posterior_probability_kde.png`, and `trace_plot.png`.
 
@@ -239,12 +241,11 @@ where:
 Example:
 
 ```text
-0.5     2
-1.5     5
-2.5     12
-3.5     20
-4.5     8
-5.5     4
+0.5      0.0
+20.5     0.0
+40.5     800.0
+50.5     2050.0
+80.5     100.0
 ```
 
 ---
@@ -335,6 +336,7 @@ A few key outputs are:
 - `posterior_summary.txt`: posterior summary statistics for the key parameters.
 - `parameters.txt`: posterior parameter samples.
 - `Inversion_t_obsRr_modRr.txt`: time, observed $R/r$, and modeled $R/r$ used in the inversion figure.
+
 
 ![Figure 2. Example output from the control experiment.](figures/Figure_control_experiment_results.png)
 
