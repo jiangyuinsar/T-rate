@@ -147,9 +147,10 @@ After a successful run, output files should be created in `example_output/`. It 
 
 ```text
 parameters.txt
+posterior_summary.txt
+R_obs_vs_mod.png
+S_modeld.png
 trace_plot.png
-lambda_modeled.png
-S_modeled.png
 ```
 
 ---
@@ -161,7 +162,7 @@ For a first test, users should:
 1. Create and activate the `Trate_env` environment.
 2. Run `python run_T_rate_inversion_example.py` without changing anything.
 3. Confirm that output files are created in `example_output/`.
-4. Open `lambda_modeled.png`, `S_modeled.png`, and `trace_plot.png`.
+4. Open `R_obs_vs_mod.png`, `S_modeld.png`, `joint_posterior_probability_kde.png`, and `trace_plot.png`.
 
 ---
 
@@ -322,26 +323,40 @@ For crustal applications, users may start with a shear modulus of 30 GPa. The st
 
 Each run produces output files in `example_output/`. The exact output folder name can be modified in the driver script.
 
-Typical outputs include:
+The current example script produces the following files:
 
 ```text
+Inversion_t_obsRr_modRr.txt
+R_obs_vs_mod.png
+R_r_optimal.txt
+R_r_results.txt
+S_modeld.png
+S_optimal.txt
+S_results.txt
+dS_optimal.txt
+dS_results.txt
+joint_posterior_probability_kde.png
 parameters.txt
 parameters_p5_p95.txt
-lambda_results.txt
-lambda_optimal.txt
-dS_results.txt
-S_results.txt
-S_optimal.txt
-trace_plot.png
+posterior_summary.txt
 prior_predictive_check_log.png
-joint_posterior_probability_kde.png
-lambda_modeled.png
-S_modeled.png
+trace_plot.png
 ```
+
+A few key outputs are:
+
+- `R_obs_vs_mod.png`: observed and modeled seismicity-rate ratio $R/r$.
+- `S_modeld.png`: inferred stressing-rate and cumulative stress histories.
+- `joint_posterior_probability_kde.png`: joint posterior probability distribution of the model parameters.
+- `trace_plot.png`: MCMC trace plot for checking sampling behavior.
+- `posterior_summary.txt`: posterior summary statistics for the key parameters.
+- `parameters.txt`: posterior parameter samples.
+- `parameters_p5_p95.txt`: posterior samples used for plotting uncertainty ranges.
+- `Inversion_t_obsRr_modRr.txt`: time, observed $R/r$, and modeled $R/r$ used in the inversion figure.
 
 ![Figure 2. Example output from the control experiment.](figures/Figure_control_experiment_results.png)
 
-*Figure 2. Input data and inversion results for the synthetic example experiment. (a) Observed event-rate ratio, R/r, and modeled conditional intensity. (b) Inferred stressing-rate history and cumulative stress history. (c) Joint posterior probability distribution of the model parameters.*
+*Figure 2. Input data and inversion results for the synthetic example experiment. (a) Observed event-rate ratio, $R/r$, and modeled conditional intensity. (b) Inferred stressing-rate history and cumulative stress history. (c) Joint posterior probability distribution of the model parameters.*
 
 The posterior parameter file is organized as:
 
