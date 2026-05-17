@@ -352,8 +352,6 @@ The synthetic values and informative prior distributions used in the example inv
 | $\Delta t_{23}$ | 20 | $\mathrm{Uniform}(\mathrm{lower}=10,\ \mathrm{upper}=30)$ |
 | $\Delta t_{34}$ | 10 | $\mathrm{Uniform}(\mathrm{lower}=5,\ \mathrm{upper}=20)$ |
 
-*The value of $\dot{\tau}_r$ should be interpreted using the stress-rate unit adopted in the example script.*
-
 The posterior parameter file is organized as:
 
 ```text
