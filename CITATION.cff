@@ -1,9 +1,11 @@
 cff-version: 1.2.0
-message: "If you use T-rate, please cite this software and the associated paper."
+message: "If you use T-rate, please cite both this software and the associated paper."
 title: "T-rate: Bayesian Inference of Stress Evolution From Seismicity Rate Observations"
 version: "1.0.0"
 doi: "10.5281/zenodo.20251772"
 date-released: 2026-05-16
+type: software
+abstract: "T-rate is a Python-based Bayesian inversion tool for inferring time-dependent fault stress evolution directly from seismicity rate observations using the rate-and-state friction framework. The code was developed for Jiang, Y., Trugman, D. T., & González, P. J. (2026), Bayesian inference of complex stress evolution in rate-and-state governed faults constrained by seismicity rate observations, Journal of Geophysical Research: Solid Earth."
 authors:
   - family-names: Jiang
     given-names: Yu
