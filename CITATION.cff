@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use T-rate, please cite this software and the associated paper."
 title: "T-rate: Bayesian Inference of Stress Evolution From Seismicity Rate Observations"
 version: "1.0.0"
-doi: ""
+doi: "10.5281/zenodo.20251772"
 date-released: 2026-05-16
 authors:
   - family-names: Jiang
