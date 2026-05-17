@@ -1,9 +1,16 @@
 # T-rate: Bayesian Inference of Stress Evolution From Seismicity Rate Observations
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20251772.svg)](https://doi.org/10.5281/zenodo.20251772)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <p align="center">
   <img src="figures/T_rate_logo.png" alt="T-rate logo" width="300">
+</p>
+
+<p align="center">
+  <a href="https://doi.org/10.5281/zenodo.20251772">
+    <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20251772-blue.svg" alt="DOI">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+  </a>
 </p>
 
 **T-rate** is a Python/PyMC tool for inferring transient stress evolution from changes in seismicity rate. It was developed for seismicity rate observations governed by rate-and-state friction and is demonstrated here using synthetic experiments.
