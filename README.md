@@ -349,7 +349,7 @@ The synthetic values and informative prior distributions used in the example inv
 | Parameter | Synthetic value | Informative prior distribution |
 |:---:|:---:|:---:|
 | $L$ | 7500 | $\mathrm{Lognormal}(\mu=\log(6500),\ \sigma=1.0)$ |
-| $\dot{\tau}_r$ | 4.1* | $\mathrm{Normal}(\mu=3.7,\ \sigma=2.0)$ |
+| $\dot{\tau}_r$ | 4.1 | $\mathrm{Normal}(\mu=3.7,\ \sigma=2.0)$ |
 | $A\sigma_0$ | 7500 | $\mathrm{Lognormal}(\mu=\log(6500),\ \sigma=1.0)$ |
 | $t_1$ | 20 | $\mathrm{Uniform}(\mathrm{lower}=10,\ \mathrm{upper}=40)$ |
 | $\Delta t_{12}$ | 30 | $\mathrm{Uniform}(\mathrm{lower}=20,\ \mathrm{upper}=40)$ |
