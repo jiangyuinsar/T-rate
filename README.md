@@ -4,7 +4,7 @@
   <img src="figures/T_rate_logo.png" alt="T-rate logo" width="300">
 </p>
 
-**T-rate** is a Python/PyMC tool for inferring transient stress evolution from changes in seismicity rate. It was developed for seismicity-rate observations governed by rate-and-state friction and is demonstrated here using synthetic experiments and sensitivity tests.
+**T-rate** is a Python/PyMC tool for inferring transient stress evolution from changes in seismicity rate. It was developed for seismicity rate observations governed by rate-and-state friction and is demonstrated here using synthetic experiments.
 
 The code was developed for:
 
@@ -62,23 +62,23 @@ where the two global parameters are $\dot{\tau}_r$ and $A\sigma_0$, and each ram
 
 ![Figure 1. Schematic of the T-rate model parameters.](figures/Figure_parameter_schematic.png)
 
-*Figure 1. Stress history and seismicity-rate response for a trapezoidal stress-rate function. (a) Prescribed stress-rate history (blue) and the resulting cumulative stress history (red). The characteristic transition times, t1–t4, are marked in green and define the onset, ramp-up, plateau, ramp-down, and termination stages of the transient stressing episode. (b) Predicted seismicity-rate ratio, R/r, derived from the stress history shown in panel (a).*
+*Figure 1. Stress and seismicity rate ratio under a trapezoidal ramp function stress rate history. (a) Stress rate (blue) and stress history (red), with the characteristic time epochs (t1-t4) highlighted in green. (b) The seismicity rate ratio is derived from the stress history shown in panel (a).*
 
-The physical meaning of the key parameters is summarized below. The table uses manuscript-style symbols; the corresponding Python variable names are given where helpful.
+The physical meaning of the key parameters is summarized below.
 
-| Group | Symbol | Python variable | Parameter name | Physical definition |
-|:---:|:---:|:---:|:---:|:---:|
-| Source | $N$ | `n_ramps` | Number of ramp functions | Number of transient stress-rate source functions |
-| Source | $L$ | `L` | Stress-rate amplitude | Peak amplitude of<br>the transient Coulomb stress rate |
-| Source | $t_1$ | `t1` | Onset time | Start time of<br>transient stress loading |
-| Source | $\Delta t_{12}$ | `delta_t12`<br>or equivalent prior variable | Ramp duration | Duration of stress-rate ramp-up |
-| Source | $\Delta t_{23}$ | `delta_t23`<br>or equivalent prior variable | Plateau duration | Duration of constant stress-rate plateau |
-| Source | $\Delta t_{34}$ | `delta_t34`<br>or equivalent prior variable | Ramp duration | Duration of stress-rate ramp-down |
-| Constitutive | $\dot{\tau}_r$ | `tau_rate_bg` | Background stress rate | Steady-state tectonic shear stressing rate |
-| Constitutive | $A\sigma_0$ | `Asigma_0` | Frictional stress scale | Controls seismicity sensitivity to<br>stress changes |
-| Constitutive | $t_a$ | `ta` | Decay time | Characteristic aftershock decay time, calculated as $A\sigma_0 / \dot{\tau}_r$ |
-| Constitutive | $R$ | `R` | Seismicity rate | Non-earthquake-triggered seismicity rate |
-| Constitutive | $r$ | `r` | Seismicity rate | Background seismicity rate |
+| Group | Symbol | Parameter name | Physical definition |
+|:---:|:---:|:---:|:---:|
+| Source | $N$ | Number of ramp functions | Number of transient stress-rate source functions |
+| Source | $L$ | Stress-rate amplitude | Peak amplitude of<br>the transient Coulomb stress rate |
+| Source | $t_1$ | Onset time | Start time of<br>transient stress loading |
+| Source | $\Delta t_{12}$ | Ramp duration | Duration of stress-rate ramp-up |
+| Source | $\Delta t_{23}$ | Plateau duration | Duration of constant stress-rate plateau |
+| Source | $\Delta t_{34}$ | Ramp duration | Duration of stress-rate ramp-down |
+| Constitutive | $\dot{\tau}_r$ | Background stress rate | Steady-state tectonic shear stressing rate |
+| Constitutive | $A\sigma_0$ | Frictional stress scale | Controls seismicity sensitivity to<br>stress changes |
+| Constitutive | $t_a$ | Decay time | Characteristic aftershock decay time,<br>calculated as $A\sigma_0 / \dot{\tau}_r$ |
+| Constitutive | $R$ | Seismicity rate | Non-earthquake-triggered seismicity rate |
+| Constitutive | $r$ | Seismicity rate | Background seismicity rate |
 
 ---
 
@@ -90,7 +90,7 @@ T-rate/
 ├── run_T_rate_inversion_example.py
 ├── example_input/
 │   └── example_input.txt
-├── example_output/
+├── example_output/example/
 ├── figures/
 │   ├── T_rate_logo.png
 │   ├── Figure_parameter_schematic.png
@@ -100,7 +100,7 @@ T-rate/
 └── LICENSE
 ```
 
-`Trate.py` contains the reusable T-rate core functions, including the forward model, likelihood functions, posterior extraction, and plotting utilities. For most users, `Trate.py` should be treated as a library file.
+`Trate.py` contains the reusable T-rate core functions, including the forward model, posterior extraction, and plotting utilities. The Bayesian model setup, including the likelihood choice, is defined in `run_T_rate_inversion_example.py`.
 
 The `run_T_rate_inversion_example.py` file is the user-facing driver script. New experiments can be created by copying and editing this script.
 
@@ -127,6 +127,7 @@ pymc
 pytensor
 arviz
 scipy
+tqdm
 ```
 
 Run the control example:
@@ -143,13 +144,13 @@ example_input/example_input.txt
 
 New users do not need to prepare their own catalog before running this example. The example inversion should run without modification if the repository is downloaded completely.
 
-After a successful run, output files should be created in `example_output/`. It should contain files such as:
+After a successful run, output files should be created in `example_output/example/`. It should contain files such as:
 
 ```text
 parameters.txt
 posterior_summary.txt
 R_obs_vs_mod.png
-S_modeld.png
+S_modeled.png
 trace_plot.png
 ```
 
@@ -161,14 +162,14 @@ For a first test, users should:
 
 1. Create and activate the `Trate_env` environment.
 2. Run `python run_T_rate_inversion_example.py` without changing anything.
-3. Confirm that output files are created in `example_output/`.
-4. Open `R_obs_vs_mod.png`, `S_modeld.png`, `joint_posterior_probability_kde.png`, and `trace_plot.png`.
+3. Confirm that output files are created in `example_output/example/`.
+4. Open `R_obs_vs_mod.png`, `S_modeled.png`, `joint_posterior_probability_kde.png`, and `trace_plot.png`.
 
 ---
 
 ## 5. What Users Should Modify
 
-For a new application or sensitivity test, users should copy one existing driver script and modify the copy.
+For a new application, users should copy one existing driver script and modify the copy.
 
 For example:
 
@@ -187,13 +188,14 @@ This function controls the Bayesian inversion setup, including:
 - sampler choice
 - likelihood choice
 - number of chains and CPU cores
-- output directory
 
 Typical parameters to modify include $L$, $t_1$, $\Delta t_{12}$, $\Delta t_{23}$, $\Delta t_{34}$, $A\sigma_0$, and $\dot{\tau}_r$.
 
 In the README and manuscript notation, the Python variable `Asigma_0` corresponds to $A\sigma_0$, and `tau_rate_bg` corresponds to $\dot{\tau}_r$.
 
-For a first trial, choose prior bounds that are broad enough to include the expected transient timing and amplitude. The prior bounds can be narrowed later in sensitivity tests if needed.
+For a first trial, choose prior bounds that are broad enough to include the expected transient timing and amplitude.
+
+The example uses 10,000 draws and 10,000 tuning steps in `pm.sample()` to balance runtime and inversion stability. Users may increase the number of draws and tuning steps to obtain more stable posterior estimates and smoother uncertainty ranges, although this will increase the computational time.
 
 ### 5.2 Main execution block
 
@@ -226,18 +228,17 @@ example_input/example_input.txt
 This file is a plain text file with **two columns**:
 
 ```text
-time    earthquake_count
+time    R/r
 ```
 
 where:
 
 - `time` is the middle time of each time bin
-- `earthquake_count` is the number of earthquakes or events in that time bin
+- `R/r` is the seismicity rate ratio in that time bin
 
 Example:
 
 ```text
-time    earthquake_count
 0.5     2
 1.5     5
 2.5     12
@@ -245,29 +246,12 @@ time    earthquake_count
 4.5     8
 5.5     4
 ```
-
-If the time-bin width is 1 day, the first row represents the bin from 0 to 1 day, with middle time 0.5 day and 2 earthquakes in that bin.
-
-The example above includes column names for explanation. If the driver script reads the file using `np.loadtxt` without `skiprows`, the actual `.txt` input file should contain only numeric values, for example:
-
-```text
-0.5     2
-1.5     5
-2.5     12
-3.5     20
-4.5     8
-5.5     4
-```
-
-The input file should not include extra columns unless the driver script has been modified to read them.
-
-The same format can also be used for other seismicity rate datasets. For example, in laboratory acoustic emission experiments, the second column can be the number of acoustic emission events in each time bin.
 
 ---
 
 ## 7. Time Units and Background Rate
 
-T-rate is unit-flexible. The time unit can be seconds, minutes, days, years, or normalized laboratory time. However, the same time unit must be used consistently for:
+The reusable forward model is unit-flexible, but the provided example script uses days as the time unit and Pa/day as the stress-rate unit. If users choose a different time unit, they should also update the prior values and plot labels in the driver/helper scripts. However, the same time unit must be used consistently for:
 
 - time
 - time-bin width `time_bin`
@@ -289,7 +273,7 @@ Start with:
 n_ramps = 1
 ```
 
-Increase `n_ramps` only if the data require more than one transient episode. More ramp functions increase model flexibility but also increase the number of parameters.
+The reusable functions in `Trate.py` support multiple ramp functions, but the current example driver script is configured for `n_ramps = 1`. To use `n_ramps > 1`, users need to define prior bounds for each additional ramp in `run_inversion()`.
 
 ### Timing parameters
 
@@ -321,7 +305,7 @@ For crustal applications, users may start with a shear modulus of 30 GPa. The st
 
 ## 9. Output Files
 
-Each run produces output files in `example_output/`. The exact output folder name can be modified in the driver script.
+Each run produces output files in `example_output/example/`. The exact output folder name can be modified in the driver script.
 
 The current example script produces the following files:
 
@@ -330,14 +314,13 @@ Inversion_t_obsRr_modRr.txt
 R_obs_vs_mod.png
 R_r_optimal.txt
 R_r_results.txt
-S_modeld.png
+S_modeled.png
 S_optimal.txt
 S_results.txt
 dS_optimal.txt
 dS_results.txt
 joint_posterior_probability_kde.png
 parameters.txt
-parameters_p5_p95.txt
 posterior_summary.txt
 prior_predictive_check_log.png
 trace_plot.png
@@ -345,60 +328,59 @@ trace_plot.png
 
 A few key outputs are:
 
-- `R_obs_vs_mod.png`: observed and modeled seismicity-rate ratio $R/r$.
-- `S_modeld.png`: inferred stressing-rate and cumulative stress histories.
+- `R_obs_vs_mod.png`: observed and modeled seismicity rate ratio $R/r$.
+- `S_modeled.png`: inferred stressing-rate and cumulative stress histories.
 - `joint_posterior_probability_kde.png`: joint posterior probability distribution of the model parameters.
 - `trace_plot.png`: MCMC trace plot for checking sampling behavior.
 - `posterior_summary.txt`: posterior summary statistics for the key parameters.
 - `parameters.txt`: posterior parameter samples.
-- `parameters_p5_p95.txt`: posterior samples used for plotting uncertainty ranges.
 - `Inversion_t_obsRr_modRr.txt`: time, observed $R/r$, and modeled $R/r$ used in the inversion figure.
 
 ![Figure 2. Example output from the control experiment.](figures/Figure_control_experiment_results.png)
 
-*Figure 2. Input data and inversion results for the synthetic example experiment. (a) Observed event-rate ratio, $R/r$, and modeled conditional intensity. (b) Inferred stressing-rate history and cumulative stress history. (c) Joint posterior probability distribution of the model parameters.*
+*Figure 2. Input data and inversion results for the synthetic example experiment. (a) Observed and modeled seismicity rate ratio, R/r. (b) Modeled stressing rate history and cumulative stress history. (c) Joint posterior probability distribution of the model parameters.*
+
+The synthetic values and informative prior distributions used in the example inversion are summarized below.
+
+| Parameter | Synthetic value | Informative prior distribution |
+|:---:|:---:|:---:|
+| $L$ | 7500 | $\mathrm{Lognormal}(\mu=\log(6500),\ \sigma=1.0)$ |
+| $\dot{\tau}_r$ | 4.1* | $\mathrm{Normal}(\mu=3.7,\ \sigma=2.0)$ |
+| $A\sigma_0$ | 7500 | $\mathrm{Lognormal}(\mu=\log(6500),\ \sigma=1.0)$ |
+| $t_1$ | 20 | $\mathrm{Uniform}(\mathrm{lower}=10,\ \mathrm{upper}=40)$ |
+| $\Delta t_{12}$ | 30 | $\mathrm{Uniform}(\mathrm{lower}=20,\ \mathrm{upper}=40)$ |
+| $\Delta t_{23}$ | 20 | $\mathrm{Uniform}(\mathrm{lower}=10,\ \mathrm{upper}=30)$ |
+| $\Delta t_{34}$ | 10 | $\mathrm{Uniform}(\mathrm{lower}=5,\ \mathrm{upper}=20)$ |
+
+*The value of $\dot{\tau}_r$ should be interpreted using the stress-rate unit adopted in the example script.*
 
 The posterior parameter file is organized as:
 
 ```text
-[t1..., t2..., t3..., t4..., L..., Asigma_0, tau_rate_bg]
+[t1..., delta_t1_t2..., delta_t2_t3..., delta_t3_t4..., L..., Asigma_0, tau_rate_bg]
 ```
-
-where `Asigma_0` corresponds to $A\sigma_0$, `tau_rate_bg` corresponds to $\dot{\tau}_r$, and `t2`, `t3`, and `t4` are calculated from `t1`, `Δt12`, `Δt23`, and `Δt34`.
 
 For one ramp:
 
 ```text
-t1  t2  t3  t4  L  Asigma_0  tau_rate_bg
+t1  delta_t1_t2  delta_t2_t3  delta_t3_t4  L  Asigma_0  tau_rate_bg
 ```
 
 For two ramps:
 
 ```text
-t1_1  t1_2  t2_1  t2_2  t3_1  t3_2  t4_1  t4_2  L_1  L_2  Asigma_0  tau_rate_bg
+t1_1  t1_2  delta_t1_t2_1  delta_t1_t2_2  delta_t2_t3_1  delta_t2_t3_2  delta_t3_t4_1  delta_t3_t4_2  L_1  L_2  Asigma_0  tau_rate_bg
 ```
 
 ---
 
-## 10. Sensitivity Tests
+## 10. Potential Applications Beyond the Synthetic Examples
 
-The repository includes one example driver script:
-
-```text
-run_T_rate_inversion_example.py
-```
-
-Users can copy and modify this script to create their own sensitivity tests. For example, users may create separate driver scripts for prior sensitivity, sampler sensitivity, or source-function sensitivity tests.
+This repository is primarily designed to demonstrate T-rate using synthetic experiments. In the current implementation, the stress source is represented by a trapezoidal stress-rate function, but this function is flexible and can approximate several simpler source types. For example, it can approximate an impulse-like function using very short but non-zero ramp durations to represent an instantaneous stress jump, such as a coseismic Coulomb stress change, or as a boxcar function to represent a period of approximately constant stressing rate, such as a simplified slow-slip event. The same framework may therefore be useful for seismicity rate data from laboratory acoustic emission experiments, earthquake swarms, induced seismicity, and slow-slip-related seismicity or tremor. For these applications, users should carefully define the background seismicity rate $r$, choose a consistent time unit, and set physically reasonable priors based on their experiment, catalog, or independent geodetic constraints. The inferred stress history should be interpreted as an effective stressing history that explains the observed seismicity rate modulation under the assumed rate-and-state model.
 
 ---
 
-## 11. Potential Applications Beyond the Synthetic Examples
-
-This repository is primarily designed to demonstrate T-rate using synthetic experiments and sensitivity tests. In the current implementation, the stress source is represented by a trapezoidal stress-rate function, but this function is flexible and can approximate several simpler source types. For example, it can be specified as an impulse-like function to represent an instantaneous stress jump, such as a coseismic Coulomb stress change, or as a boxcar function to represent a period of approximately constant stressing rate, such as a simplified slow-slip episode. The same framework may therefore be useful for seismicity-rate data from laboratory acoustic emission experiments, earthquake swarms, induced seismicity, and slow-slip-related seismicity or tremor. For these applications, users should carefully define the background seismicity rate $r$, choose a consistent time unit, and set physically reasonable priors based on their experiment, catalog, or independent geodetic constraints. The inferred stress history should be interpreted as an effective stressing history that explains the observed seismicity-rate modulation under the assumed rate-and-state model.
-
----
-
-## 12. Citation
+## 11. Citation
 
 If you use T-rate in your research, please cite:
 
@@ -408,6 +390,6 @@ Journal of Geophysical Research: Solid Earth.
 
 ---
 
-## 13. License
+## 12. License
 
 This repository is released under the MIT License. See the `LICENSE` file for details.
