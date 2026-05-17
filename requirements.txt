@@ -1,0 +1,18 @@
+# Core numerical and data-processing packages
+numpy
+pandas
+
+# Plotting and visualization
+matplotlib
+seaborn
+
+# Bayesian inference and diagnostics
+pymc
+pytensor
+arviz
+
+# Optional but commonly useful
+scipy
+
+# Progress bars for long post-processing steps
+tqdm
