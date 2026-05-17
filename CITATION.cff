@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use T-rate, please cite this software and the associated paper."
+title: "T-rate: Bayesian Inference of Stress Evolution From Seismicity Rate Observations"
+version: "1.0.0"
+doi: ""
+date-released: 2026-05-16
+authors:
+  - family-names: Jiang
+    given-names: Yu
+    orcid: ""
+  - family-names: Trugman
+    given-names: Daniel T.
+  - family-names: González
+    given-names: Pablo J.
+repository-code: "https://github.com/jiangyuinsar/T-rate"
+license: "MIT"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Jiang
+      given-names: Yu
+    - family-names: Trugman
+      given-names: Daniel T.
+    - family-names: González
+      given-names: Pablo J.
+  title: "Bayesian inference of complex stress evolution in rate-and-state governed faults constrained by seismicity rate observations"
+  journal: "Journal of Geophysical Research: Solid Earth"
+  year: 2026
