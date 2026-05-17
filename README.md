@@ -338,6 +338,8 @@ A few key outputs are:
 - `Inversion_t_obsRr_modRr.txt`: time, observed $R/r$, and modeled $R/r$ used in the inversion figure.
 
 
+
+
 ![Figure 2. Example output from the control experiment.](figures/Figure_control_experiment_results.png)
 
 *Figure 2. Input data and inversion results for the synthetic example experiment. (a) Observed and modeled seismicity rate ratio, R/r. (b) Modeled stressing rate history and cumulative stress history. (c) Joint posterior probability distribution of the model parameters.*
